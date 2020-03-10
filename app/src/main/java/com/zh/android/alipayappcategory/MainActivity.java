@@ -1,13 +1,12 @@
 package com.zh.android.alipayappcategory;
 
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import me.drakeet.multitype.MultiTypeAdapter;
-
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.zh.android.alipayappcategory.item.AppCategoryViewBinder;
@@ -16,6 +15,11 @@ import com.zh.android.alipayappcategory.model.AppCategoryModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.drakeet.multitype.MultiTypeAdapter;
+
+/**
+ * @author wally
+ */
 public class MainActivity extends AppCompatActivity {
     private TabLayout vTab;
     private RecyclerView vAppList;
@@ -50,33 +54,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        mAppCategoryList.add(generateAppCategory("便民生活"));
-        mAppCategoryList.add(generateAppCategory("财富管理"));
-        mAppCategoryList.add(generateAppCategory("资金往来"));
-        mAppCategoryList.add(generateAppCategory("购物娱乐"));
-        mAppCategoryList.add(generateAppCategory("教育公益"));
-        mAppCategoryList.add(generateAppCategory("第三方服务"));
+        mAppCategoryList.add(generateAppCategory("便民生活", 6));
+        mAppCategoryList.add(generateAppCategory("财富管理", 6));
+        mAppCategoryList.add(generateAppCategory("资金往来", 6));
+        mAppCategoryList.add(generateAppCategory("购物娱乐", 6));
+        mAppCategoryList.add(generateAppCategory("教育公益", 6));
+        mAppCategoryList.add(generateAppCategory("第三方服务", 18));
     }
 
     /**
      * 生成分组
      *
      * @param groupName 分组名
+     * @param count     生成的数量
      */
-    private AppCategoryModel generateAppCategory(String groupName) {
+    private AppCategoryModel generateAppCategory(String groupName, int count) {
         return new AppCategoryModel(
                 groupName,
-                generateAppCategoryChildAppList(groupName));
+                generateAppCategoryChildAppList(groupName, count));
     }
 
     /**
      * 生成分组内的App列表
      *
      * @param groupName 分组名
+     * @param count     生成的数量
      */
-    private List<AppCategoryModel.AppModel> generateAppCategoryChildAppList(String groupName) {
+    private List<AppCategoryModel.AppModel> generateAppCategoryChildAppList(String groupName, int count) {
         List<AppCategoryModel.AppModel> appModels = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < count; i++) {
             String appName = groupName + (i + 1);
             appModels.add(new AppCategoryModel.AppModel(appName, R.mipmap.ic_launcher));
         }
